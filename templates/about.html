@@ -23,26 +23,125 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href='index.html'>Yelp Star Adjuster</a>
+          <a class='navbar-brand' href=''>Yelp Star Adjuster</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html">Map</a></li>
-            <li class='active'><a href="about.html")>About</a></li>
+            <li><a href="/">Map</a></li>
+            <li class='active'><a href="about")>About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
+      </div>
+    </div>
+ <!----- The Data --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>About Yelp Star Adjust</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-8'>
+          <h1>The Data</h1>
+          <img src="{{ url_for('static', filename='images/data_summary.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Yelp Star Adjust is a result of the 6th 
+          <a href="https://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a>.
+          The data consists of 1.6 million reviews of 61 thousand businesses from 
+          thousands reviewers. These businesses are located around the world.</p>
+          <ul>
+          <li><i>Canada</i>: Montreal and Waterloo
+          <li><i>Germany</i>: Karlsrhue
+          <li><i>Scotland</i>: Edinburgh
+          <li><i>United States</i>: Champaign-Urbana, Charlotte, Las Vegas, Madison,
+          Phoenix and Pittsburgh
+          </ul>
+          <p></p>
+        </div>
+      </div>
+    </div>
+<!----- Date Correction --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Date Correction</h1>
+          <img src="{{ url_for('static', filename='images/psd_az.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Each of the metro regions in the dataset is affected by seasonal variations
+          differently.</p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+<!----- City Correction --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>City Correction</h1>
+          <img src="{{ url_for('static', filename='images/raw_city_hist.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Each city rates their own restaurants on different scales. How can
+          one compare yelp ratings uniformly?</p>
+          <p></p>
+        </div>
       </div>
     </div>
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-12'>
-          <h1>About</h1>
-          <p>This page will have more information about my project.</p>
-          <p>This page will give more context to your map.</p>
+          <img src="{{ url_for('static', filename='images/corr_city_hist.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Standardized yelp ratings between the cities.</p>
+          <p></p>
         </div>
       </div>
     </div>
-
+ <!----- Anchor Correction --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Anchor Correction</h1>
+          <img src="{{ url_for('static', filename='images/anchor_vs_raw.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>The correction for anchoring is plotted above.</p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+<!----- Future Work --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Number of Reviews Correction</h1>
+          <img src="{{ url_for('static', filename='images/violin_all.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Distribution of ratings as a function of the number of reviews.</p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <img src="{{ url_for('static', filename='images/violin_all_vs_high.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p>Violin plot showing the evolution of the ratings of frequently reviewed
+          restaurants.</p>
+          <p></p>
+        </div>
+      </div>
+    </div> 
+<!----- More Information --->
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>More Information</h1>
+          <p>GitHub link, TDI link, Yelp Link</p>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.10.2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
   </body>
