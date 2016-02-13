@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Yelp Star Adjuster</title>
+    <title>Star Adjust</title>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
@@ -9,13 +9,14 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
-    <div class='navbar navbar-default navbar-static-top'>
+    <div class='navbar navbar-default navbar-fixed-top'>
       <div class='container-fluid'>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,124 +24,65 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href=''>Yelp Star Adjuster</a>
+          <a class='navbar-brand' href=''>Star Adjust</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Map</a></li>
-            <li class='active'><a href="about")>About</a></li>
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analysis <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="analysis#about">About Star Adjust</a></li>
+            <li><a href="analysis#data">The Data</a></li>
+            <li><a href="analysis#date_correction">Date Correction</a></li>
+            <li><a href="analysis#city_correction">City Correction</a></li>
+            <li><a href="analysis#anchor_correction">Anchor Correction</a></li>
+            <li><a href="analysis#future_work">Future Work</a></li>
+            <li><a href="analysis#info">More Information</a></li>
+          </ul>
+        </li>
+            <li class='active'><a href="about")>About Me</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
- <!----- The Data --->
+
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-12'>
-          <h1>About Yelp Star Adjust</h1>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-md-8'>
-          <h1>The Data</h1>
-          <img src="{{ url_for('static', filename='images/data_summary.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Yelp Star Adjust is a result of the 6th 
-          <a href="https://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a>.
-          The data consists of 1.6 million reviews of 61 thousand businesses from 
-          thousands reviewers. These businesses are located around the world.</p>
-          <ul>
-          <li><i>Canada</i>: Montreal and Waterloo
-          <li><i>Germany</i>: Karlsrhue
-          <li><i>Scotland</i>: Edinburgh
-          <li><i>United States</i>: Champaign-Urbana, Charlotte, Las Vegas, Madison,
-          Phoenix and Pittsburgh
-          </ul>
+          <h1>About Me</h1>
           <p></p>
         </div>
+      </div>
+      <div class="row">
+        <div class="span2"></div>
+        <div class="col-md-3">
+        <img class="center-block" src="{{ url_for('static', filename='images/profile.jpeg') }}"
+          class="img-responsive" style="padding-top: 5px" width=200px></div>
+        <div class="col-md-7">
+          <p>Hi, I am Daniel Logan. I received my PhD in astronomy from the
+          University of Massachusetts.
+          I have always been interested in how things are measured and if the 
+          measures we have are telling us what we want to know. Star Adjust is my 
+          capstone project when I was a fellow at the Data Incubator and grew out 
+          of this interest.
+          </p>
+          <p>I am entering the field data science because I see the tools
+          it brings as a new way to address some of these measurement challenges.
+          I am currently exploring opportunities to develop of Data Science skills.
+          If you have questions or comments, please email me at the link below or
+          feel free to check me out on LinkedIn.
+          <p></p>
+          <p class="text-center"><b>Contact Me</b></p>
+          <p class="text-center"><a href="mailto:daniel.w.logan@gmail.com">
+          <i class="fa fa-envelope-square fa-3x"></i></a>&nbsp;
+          <a href="https://ca.linkedin.com/in/danielwlogan">
+          <i class="fa fa-linkedin-square fa-3x"></i></a></p>
+        </div>
+        <p></p>
       </div>
     </div>
-<!----- Date Correction --->
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>Date Correction</h1>
-          <img src="{{ url_for('static', filename='images/psd_az.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Each of the metro regions in the dataset is affected by seasonal variations
-          differently.</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
-<!----- City Correction --->
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>City Correction</h1>
-          <img src="{{ url_for('static', filename='images/raw_city_hist.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Each city rates their own restaurants on different scales. How can
-          one compare yelp ratings uniformly?</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <img src="{{ url_for('static', filename='images/corr_city_hist.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Standardized yelp ratings between the cities.</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
- <!----- Anchor Correction --->
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>Anchor Correction</h1>
-          <img src="{{ url_for('static', filename='images/anchor_vs_raw.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>The correction for anchoring is plotted above.</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
-<!----- Future Work --->
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>Number of Reviews Correction</h1>
-          <img src="{{ url_for('static', filename='images/violin_all.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Distribution of ratings as a function of the number of reviews.</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <img src="{{ url_for('static', filename='images/violin_all_vs_high.png') }}"
-          class="img-responsive" style="padding-top: 5px">
-          <p>Violin plot showing the evolution of the ratings of frequently reviewed
-          restaurants.</p>
-          <p></p>
-        </div>
-      </div>
-    </div> 
-<!----- More Information --->
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>More Information</h1>
-          <p>GitHub link, TDI link, Yelp Link</p>
-          <p></p>
-        </div>
-      </div>
-    </div>
+
     
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.10.2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Star Adjust</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content='' name='description' />
+    <meta content='' name='author' />
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='navbar navbar-default navbar-fixed-top'>
+      <div class='container-fluid'>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class='navbar-brand' href=''>Star Adjust</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Map</a></li>
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analysis <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="analysis#about">About Star Adjust</a></li>
+            <li><a href="analysis#data">The Data</a></li>
+            <li><a href="analysis#date_correction">Date Correction</a></li>
+            <li><a href="analysis#city_correction">City Correction</a></li>
+            <li><a href="analysis#anchor_correction">Anchor Correction</a></li>
+            <li><a href="analysis#future_work">Future Work</a></li>
+            <li><a href="analysis#info">More Information</a></li>
+          </ul>
+        </li>
+            <li><a href="about")>About Me</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <section id="about">
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>About Star Adjust</h1>
+          <p>How much should you trust Yelp ratings of restaurants? This Star Adjust
+          application explores hidden factors that influence online ratings of
+          restaurants.</p>
+          <p>Rating restaurants is a complex cognitive task. The ultimate user rating
+          is derived from a combination of the taste of the food, quality of the
+          service and the atmosphere of the restaurant. However, the rating also
+          depends on factors beyond the establishment's control including how much 
+          reviewers are influenced by previous ratings and when the reviews are
+          made. These and many other factors influence the ulitamte reviewer rating.
+          Ultimately, the goal of the project is to compensate for these influences
+          and produce more authentic user ratings.
+          </p>
+        </div>
+      </div>
+     </div>
+    </section>
+    <hr class="symbol">
+ <!----- The Data --->
+      <section id="data">
+   <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>The Data</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/data_summary.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+        </div>
+        <div class='col-md-6'>
+          <p>The data behind Star Adjust comes from the 6th 
+          <a href="https://www.yelp.com/dataset_challenge">Yelp Dataset Challenge</a>.
+          The data consists of 1.6 million reviews of 61 thousand businesses from 
+          thousands of reviewers. These businesses are located four countries in 
+          North American and Europe.</p>
+          <ul>
+          <li><i>Canada</i>: Montr&eacute;al and Waterloo
+          <li><i>Germany</i>: Karlsrhue
+          <li><i>Scotland</i>: Edinburgh
+          <li><i>United States</i>: Champaign-Urbana, Charlotte, Las Vegas, Madison,
+          Phoenix and Pittsburgh
+          </ul>
+          <p>A total of nearly 22,000 restaurants are used in the following 
+          analyses.</p>
+          <p></p>
+        </div>
+      </div>
+     </div>
+      </section>
+      <hr class="symbol">
+<!----- Date Correction --->
+    <section id="date_correction"
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Date Correction</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <p>Each of the metro regions in the dataset is affected by seasonal variations
+          differently. While crowded caf&eacute; tables fill the streets of 
+          Vieux-Montr$eacuteal in July, the non-seasonal residents of Phoenix are
+          in the middle of the blistering heat. Each Yelp review is date stamped which
+          allows an exploration of how these reviews vary across the days of the
+          week to seeing annual cycles of the ratings.</p>
+          <p>The best way to determine the periodicity of our data is to decompose
+          our ratings into their 
+          <a href="https://en.wikipedia.org/wiki/Fourier_analysis">Fourier components</a>. 
+          The figure displayed to the right highlights the Fourier analysis of the
+          restaurant ratings for Phoenix, Arizona by displaying the 
+          <a href="https://en.wikipedia.org/wiki/Spectral_density#Power_spectral_density">
+          power spectral density</a> (PSD). By identifying the peaks in the PSD,
+          one is able to calculate periodicity in the ratings. In the figure shown,
+          we highlight the strong spike at a frequency of ~0.14 cycles/day which
+          gives a period of 7.0 days. There is a weekly cycle of Yelp ratings! 
+          Additional periods are found around 1 year. The relative strength of the 
+          cycles varies by city.</p>
+          <p>By identifying the critical frequencies it is possible to create a
+          city dependent model to correct for these temporal variations. The first
+          step is to linearize the dates by creating model features of the strongest
+          Fourier components. The model is generated from these new features applied 
+          to a <a href="https://en.wikipedia.org/wiki/Tikhonov_regularization">Ridge 
+          regression</a> linear model. This model can then be applied to the 
+          individual restaurants to generate a rating correction dependent upon
+          when the reviews of that restaurant were made.
+        </div>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/psd_az.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p></p>
+        </div>
+      </div>
+    </div>
+    </section>
+      <hr class="symbol">
+<!----- City Correction --->
+    <section id="city_correction">
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>City Correction</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/raw_city_hist.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+        </div>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/corr_city_hist.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <p>Each city rates their own restaurants on different scales. Is one 
+          city's 4.5 star restaurant better than another city's 4.2 star restaurant?
+          How can one compare yelp ratings between cities? The first figure above
+          shows a histogram of the ratings of all the restaurants in Montr&eacute;al
+          (blue) and Champaign-Urbana, IL (yellow). The restaurants in Montr&eacute;al
+          have both a higher mean (3.60 vs. 3.38) and a higher standard deviation 
+          (0.74 vs 0.69) than restaurants in Illinois.</p>
+          <p>To standardize the ratings to compare restaurants between cities and
+          to maximize the full five point scale, I create a city corrected rating
+          for each restauant given its city's mean rating and standard deviation
+          using z-scores:
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span4"></div>
+        <div class="span4"><img class="center-block" src="{{ url_for('static', filename='images/equation.png') }}" style="padding-top: 5px" width=100px></div>
+        <div class="span4"></div>
+        <p></p>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+        <p>Applying this formula to the restaurants and centering the results to
+        a new mean of 3 gives overlapping distributions (second figure). This
+        analysis is especially beneficial at identifying the top restaurants in 
+        each region as the scaling places their final rating farther from the mean.
+    </div>
+    </section>
+      <hr class="symbol">
+ <!----- Anchor Correction --->
+    <section id="anchor_correction">
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Anchor Correction</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/anchor_vs_raw.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+        </div>
+        <div class='col-md-6'>
+          <p>How much does a restaurant's current rating influence our own experiences?
+          Anyone familiar with the art of negotiation has learned the concept of
+          anchoring. When tasked with providing a rating, reviewers will use not only
+          their own experiences but the similar experiences of others. For Yelp, 
+          the existing rating of the restaurant influences what a reviewer ultimately
+          chooses. Anchoring tends to bring the submitted rating closer to the
+          mean of the previous ratings. This effect works in both a positive and
+          negative way (i.e. anchoring tends to lower high scores but increase low
+          scores).</p>
+          
+          <p>While the existence of anchoring has been well studied, the
+          magnitude of effect has been difficult to quanitfy. The analysis presented
+          here is based on research conducted by
+          <a href=''>Adomavicius et al.</a> who attempted to quanitfy the anchoring
+          effect in user ratings. The anchoring correction is proportional to the
+          difference between the submitted rating and the reported average rating
+          at the time of submission. By estimating the magnitude of this correction
+          I am able to estimate an review independent rating from the reviewer.
+          </p>
+          <p>The figure shows the magnitude and distribution of the anchor corrected
+          ratings as a function of the restaurant ratings for the restaurants in our
+          data set. The strong 1-to-1 line is due to the anchor correction only 
+          applying to restaurants with more than 10 reviews.
+        </div>
+      </div>
+    </div>
+    </section>
+      <hr class="symbol">
+<!----- Future Work --->
+    <section id="future_work">
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Future Work - Number of Reviews Correction</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <p>One interesting outcome of the analysis is how restaurant ratings
+          evolve over time. As one may expect, lower rated restaurants do not 
+          show up in the database. The lack of 1 and 2 star restaurants with 
+          hundreds of reviews may be an indication that the restaurant closed, 
+          significantly improved, or some other reason. Likewise, the more reviews
+          a top restaurant has the harder it is to maintain that 5 star rating. 
+          Is the decline of the top rated restaurants a consequence of the high 
+          expectations of that 5 star ratings or is it symptomatic of some 
+          business decisions (growing pains, efficiencies, etc.)?
+          </p>
+          <p>The figure is a first look at addressing how the number of reviews 
+          influences the ultimate rating of the restaurant. First the data is 
+          grouped into five bins based on their number of user reviews. The blue 
+          (left) half of the violins shows the star distribution of all reviews 
+          in that bin. The green (right) half of the violins show the distribution
+          of the most reviewed restaurants given their first 10, 50, 100, ...
+          reviews. What is immediately clear is that the most reviewed restauarants 
+          are consistently rated high. However, the mean of those highly reviewed 
+          restaurants actually <em>decreases</em> as the number of reviews increases. 
+          Once a restaurant is reviewed approximately 1000 times it is possible to 
+          predict their (uncorrected) rating independent of any other factor.
+          </p>
+        </div>
+        <div class='col-md-6'>
+          <img src="{{ url_for('static', filename='images/violin_all_vs_high.png') }}"
+          class="img-responsive" style="padding-top: 5px">
+          <p></p>
+        </div>
+      </div>
+    </div> 
+    </section>
+      <hr class="symbol">
+<!----- More Information --->
+    <section id="info">
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>More Information</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <p>This project was undertaken as part of The Data Incubator's 8 week data 
+        science boot camp. Code for the project can be found on GitHub by clicking the icon
+        below. This website is not affliated with nor endorsed by Yelp Inc.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+          <a href="https://github.com/danielwlogan/DI-Capstone"><i class="fa fa-github-square fa-3x center-block"></i></a> 
+        </div>
+        <div class="col-md-2">
+          <a href="https://www.yelp.com/"><img class="center-block" width=100px src="{{ url_for('static', filename='images/yelp-logo-large.png') }}"></a> 
+        </div>
+        <div class="col-md-2">
+          <a href="https://www.thedataincubator.com/"><img class="center-block" height=50px src="{{ url_for('static', filename='images/TheDataIncubator.jpg') }}"></a>
+        </div>
+      </div>
+    </div>
+    </section>
+    
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.10.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </body>
+</html>

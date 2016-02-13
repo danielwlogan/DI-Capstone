@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Yelp Star Adjuster</title>
+    <title>Star Adjust</title>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
@@ -15,7 +15,7 @@
     <![endif]-->
   </head>
   <body>
-    <div class='navbar navbar-default navbar-static-top'>
+    <div class='navbar navbar-default navbar-fixed-top'>
       <div class='container-fluid'>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,12 +23,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href="">Yelp Star Adjuster</a>
+          <a class='navbar-brand' href="">Star Adjust</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class='active'><a href="">Map</a></li>
-            <li><a href="about">About</a></li>
+            <li class='active'><a href="/">Map</a></li>
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Analysis <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="analysis#about">About Star Adjust</a></li>
+            <li><a href="analysis#data">The Data</a></li>
+            <li><a href="analysis#date_correction">Date Correction</a></li>
+            <li><a href="analysis#city_correction">City Correction</a></li>
+            <li><a href="analysis#anchor_correction">Anchor Correction</a></li>
+            <li><a href="analysis#future_work">Future Work</a></li>
+            <li><a href="analysis#info">More Information</a></li>
+          </ul>
+        </li>
+            <li><a href="about")>About Me</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -36,7 +48,10 @@
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-4'>
-          <p>This website allows users to view corrected Yelp ratings for restaurants in 10 metro areas in 4 countries.</p>
+          <p>How reliable are Yelp ratings? Are the ratings affected by when the
+          reviews were made or by the culture of the reviewer? This website allows 
+          you to view "corrected" Yelp ratings for restaurants in 10 metro areas 
+          in 4 countries.</p>
           <div class='well'>
             <h4>
               Address <small>(<a id='find_me' href="#">find me</a>)</small>
@@ -55,6 +70,45 @@
                 </select>
               </label>
             </p> 
+            
+            <ul class='inputs-list unstyled'>
+              <li>
+              <label class='checkbox inline'>
+                <input type='checkbox' id='cbType1' />
+                <img src="{{ url_for('static', filename='images/one_star.png') }}"
+                width=130px>
+              </label>
+              </li>
+              <li>
+              <label class='checkbox inline'>
+                <input type='checkbox' id='cbType2' />
+                <img src="{{ url_for('static', filename='images/two_star.png') }}"
+                width=130px>
+              </label>
+              </li>
+              <li>
+              <label class='checkbox inline'>
+                <input type='checkbox' id='cbType3' />
+                <img src="{{ url_for('static', filename='images/three_star.png') }}"
+                width=130px>
+             </label>
+             </li>
+             <li>
+              <label class='checkbox inline'>
+                <input type='checkbox' id='cbType4' />
+                <img src="{{ url_for('static', filename='images/four_star.png') }}"
+                width=130px>
+             </label>
+             </li>
+             <li>
+              <label class='checkbox inline'>
+                <input type='checkbox' id='cbType5' />
+                <img src="{{ url_for('static', filename='images/five_star.png') }}"
+                 width=130px>
+             </label>
+             </li>
+           </ul>
+            
 
             <br />
            <br />
@@ -98,7 +152,7 @@
         
         $(function() {
           var myMap = new MapsLib({
-            fusionTableId:      "1sDvx_52R2sGZSkto74qcmO4XCx_J8oTD06i0Rcwc",
+            fusionTableId:      "1EZ-WrdYmfx3w3ATDA-OI5w4qKupQWNC3haQG0Jow",
             googleApiKey:       "AIzaSyDKnakR_zgN3X8UcjA3VMnAcVn3DbcHGLA",
             locationColumn:     "latitude",
             map_center:         [40.29674179982401, -50.541031249999996],
